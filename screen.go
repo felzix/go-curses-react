@@ -75,7 +75,7 @@ func paint(screen *Screen, dom *DOMNode) error {
 		for Δx := 0; Δx < dom.width; Δx++ {
 			for Δy := 0; Δy < dom.height; Δy++ {
 				cell := dom.region.Cells[Δx][Δy]
-				screen.TCellScreen.SetContent(dom.x+Δx, dom.y+Δy, cell.r, nil, cell.style) // draw to screen
+				screen.TCellScreen.SetContent(dom.x+Δx, dom.y+Δy, cell.R, nil, cell.Style) // draw to screen
 				screen.CellOwners[dom.x+Δx][dom.y+Δy] = dom                                // for HandleKey and HandleMouse
 			}
 		}

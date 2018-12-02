@@ -25,8 +25,8 @@ type Region struct {
 	Height int
 }
 type Cell struct {
-	r     rune
-	style tcell.Style
+	R     rune
+	Style tcell.Style
 }
 
 func NewRegion(x, y, width, height int) *Region {
