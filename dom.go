@@ -18,11 +18,11 @@ type DOMNode struct {
 }
 
 type Region struct {
-	cells  [][]Cell
-	x      int
-	y      int
-	width  int
-	height int
+	Cells  [][]Cell
+	X      int
+	Y      int
+	Width  int
+	Height int
 }
 type Cell struct {
 	r     rune
@@ -36,11 +36,11 @@ func NewRegion(x, y, width, height int) *Region {
 	}
 
 	return &Region{
-		cells:  cells,
-		x:      x,
-		y:      y,
-		width:  width,
-		height: height,
+		Cells:  cells,
+		X:      x,
+		Y:      y,
+		Width:  width,
+		Height: height,
 	}
 }
 

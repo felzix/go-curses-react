@@ -21,7 +21,7 @@ func Label() *ReactElement {
 			}
 
 			for x := 0; x < width; x++ {
-				result.Region.cells[x][0] = Cell{
+				result.Region.Cells[x][0] = Cell{
 					r:     rune(label[x]),
 					style: tcell.StyleDefault,
 				}
@@ -50,7 +50,7 @@ func Line() *ReactElement {
 			}
 
 			for x := 0; x < length; x++ {
-				result.Region.cells[x][0] = Cell{
+				result.Region.Cells[x][0] = Cell{
 					r:     char,
 					style: tcell.StyleDefault,
 				}
@@ -84,7 +84,7 @@ func TextEntry() *ReactElement {
 			}
 
 			for x := 0; x < length; x++ {
-				result.Region.cells[x][0] = Cell{
+				result.Region.Cells[x][0] = Cell{
 					r:     rune(s[x]),
 					style: tcell.StyleDefault,
 				}

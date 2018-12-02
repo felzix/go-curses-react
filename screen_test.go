@@ -20,10 +20,10 @@ func Test_simple(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	if result.Region.cells[0][0].r != 'p' {
+	if result.Region.Cells[0][0].r != 'p' {
 		t.Errorf(
 			`Drawn cell should be "p" but was "%v"`,
-			result.Region.cells[0][0].r,
+			result.Region.Cells[0][0].r,
 		)
 	}
 }
@@ -66,12 +66,12 @@ func Test_children(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	e0drRune := e0dr.Region.cells[0][0].r
+	e0drRune := e0dr.Region.Cells[0][0].r
 	if e0drRune != 'W' {
 		t.Errorf(`Expected "W" but got "%v"`, e0drRune)
 	}
 
-	e1drRune := e1dr.Region.cells[0][0].r
+	e1drRune := e1dr.Region.Cells[0][0].r
 	if e1drRune != 'G' {
 		t.Errorf(`Expected "G" but got "%v"`, e1drRune)
 	}
@@ -96,7 +96,7 @@ func Test_toDOM(t *testing.T) {
 		t.Errorf(`Expected "2" children but has "%d" children`, len(dom.children))
 	}
 
-	if expected := dom.children[1].region.cells[1][0].r; expected != 'o' {
+	if expected := dom.children[1].region.Cells[1][0].r; expected != 'o' {
 		t.Errorf(`Expected "o" but got "%v"`, expected)
 	}
 }
