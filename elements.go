@@ -95,6 +95,7 @@ func TextEntry() *ReactElement {
 		HandleKeyFn: func(r *ReactElement, e *tcell.EventKey) (bool, error) {
 			// TODO handle backspace
 			// TODO handle more commands like emacs-mode (ctrl-e, ctrl-a, pasting?)
+			// TODO validation (esp. rejecting empty entry)
 			whenFinished := r.Props["whenFinished"].(func(string) error)
 			value := r.State["value"].(string)
 			finished := r.State["finished"].(bool)
