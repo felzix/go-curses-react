@@ -102,12 +102,14 @@ func TextEntry() *ReactElement {
 
 			if finished { // trigger only once
 				return true, nil
+			} else if e.Key() == tcell.KeyRune { // append rune
+				r.State["value"] = value + string(e.Rune())
+				return false, nil
 			} else if e.Key() == tcell.KeyEnter { // trigger callback
 				r.State["finished"] = true
 				return false, whenFinished(value)
-			} else { // keep going
-				r.State["value"] = value + string(e.Rune())
-				return false, nil
+			} else { // unknown key so don't capture it
+				return true, nil
 			}
 		},
 	}

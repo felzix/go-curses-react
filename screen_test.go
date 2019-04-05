@@ -78,7 +78,6 @@ func Test_children(t *testing.T) {
 }
 
 func Test_toDOM(t *testing.T) {
-
 	r := HorizontalLayout()
 	r.Props = Properties{
 		"children": []*Child{
