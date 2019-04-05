@@ -137,6 +137,10 @@ func (screen *Screen) HandleKey(e *tcell.EventKey) error {
 	y := screen.CursorY
 	domNode := screen.CellOwners[x][y]
 
+	if domNode == nil { // empty part of screen
+		return screen.defaultKeyHandler(e)
+	}
+
 	var inner func(*DOMNode) error
 	inner = func(domNode *DOMNode) error {
 		reactElement := domNode.element
@@ -146,7 +150,6 @@ func (screen *Screen) HandleKey(e *tcell.EventKey) error {
 			if domNode.parent != nil { // propagate to the parent
 				return inner(domNode.parent)
 			} else { // propagated over the top so use the defaults
-				// TODO
 				return screen.defaultKeyHandler(e)
 			}
 		} else { // propagate no further
@@ -158,21 +161,31 @@ func (screen *Screen) HandleKey(e *tcell.EventKey) error {
 }
 
 func (screen *Screen) defaultKeyHandler(e *tcell.EventKey) error {
+	width, height := screen.TCellScreen.Size()
+
 	switch e.Key() {
 	case tcell.KeyEsc: // Can always quit with ESC
 		if err := screen.QuitCallback(nil); err != nil {
 			return errors.Wrap(err, "Failed when executing QuitCallback")
 		}
 	case tcell.KeyUp:
-		screen.SetCursor(screen.CursorX, screen.CursorY-1)
+		if screen.CursorY > 0 {
+			screen.SetCursor(screen.CursorX, screen.CursorY-1)
+		}
 	case tcell.KeyDown:
-		screen.SetCursor(screen.CursorX, screen.CursorY+1)
+		if screen.CursorY < height - 1 {
+			screen.SetCursor(screen.CursorX, screen.CursorY+1)
+		}
 	case tcell.KeyLeft:
-		screen.SetCursor(screen.CursorX-1, screen.CursorY)
+		if screen.CursorX > 0 {
+			screen.SetCursor(screen.CursorX-1, screen.CursorY)
+		}
 	case tcell.KeyRight:
-		screen.SetCursor(screen.CursorX+1, screen.CursorY)
+		if screen.CursorX < width - 1 {
+			screen.SetCursor(screen.CursorX+1, screen.CursorY)
+		}
 	default:
-		return screen.HandleKey(e)
+		return nil
 	}
 
 	return nil
